@@ -77,7 +77,7 @@ $ ansible --version
 ```
 ansible [core 2.17.14]
 
-## Destruction de la machine
+### Destruction de la machine
 Une fois nos tâches finies, nous pouvons détruire la machine.
 
 ```bash
