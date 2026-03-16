@@ -12,7 +12,7 @@ $ vagrant ssh control
 
 ### Challenge
 
-Éditez /etc/hosts de manière à ce que les Target Hosts soient joignables par leur nom d'hôte simple.
+Éditez /etc/hosts de manière à ce que les Target Hosts soient joignables par leur nom d'hôte simple. 
 
 Pour rappel :
 
