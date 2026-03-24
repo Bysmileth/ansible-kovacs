@@ -77,6 +77,9 @@ ansible all -a "df -h /"
 
 ![Affichage de l'espace utilisé sur les partitions principales](Capture/6.png) 
 
-On remarque...
+On remarque que les disques apparaissent avec l’état `changed`, et c’est normal. Certaines commandes système ne permettent pas de vérifier l’état final ; elles ne peuvent donc pas confirmer que les changements ont déjà été effectués. Par conséquent, Ansible considère toujours qu’un changement a eu lieu.
 
+Par exemple, si j’exécute une commande avec un paramètre comme `state=present` (voir l’exemple avec `tree`), Ansible peut vérifier si l’état souhaité est déjà atteint. Dans ce cas, il détecte que rien n’a changé et renvoie ok.
+
+En revanche, pour les disques, nous n’avons pas ce type de paramètre permettant de vérifier l’état. Ansible ne peut donc pas savoir si l’action a déjà été réalisée, et il indique systématiquement changed.
 
