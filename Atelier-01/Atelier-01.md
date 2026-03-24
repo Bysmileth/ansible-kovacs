@@ -11,7 +11,7 @@ cd ~/formation-ansible/atelier-01
 vagrant up ubuntu
 vagrant global-status
 ```
-![Global-status](Capture/1.png) 
+![Démarrage de la VM£](Capture/1.png) 
 ### Connexion à la VM
 
 ```bash
