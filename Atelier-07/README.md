@@ -61,6 +61,7 @@ Supprimez le fichier `/tmp/test3.txt` sur les Target Hosts en utilisant le modul
 ```bash
 ansible all -m file -a "dest=/etc/fstab state=absent"
 ```
+Ici la commande a déjà été réaliser mais je la relance pour bien vérifier que le fichier a été désinstaller.
 ![Suppresion du fichier fstab](Capture/5.png) 
 
 ### Affichage de l'espace utilisé sur les partitions principales
