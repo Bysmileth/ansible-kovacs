@@ -1,4 +1,4 @@
-# Atelier 06
+# Atelier 10
 ## Atelier pratique
 ### Initialisation des VMs
 
