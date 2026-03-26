@@ -14,6 +14,7 @@ vagrant up
 ### Création du playbook chrony.yml
 
 ```bash
+vagrant ssh ansible
 cd /home/vagrant/ansible/projets/ema/playbooks
 touch chrony.yml
 ```
