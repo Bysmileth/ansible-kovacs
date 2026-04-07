@@ -1,8 +1,26 @@
-# Compte-rendus des ateliers
+# Ansible Kovacs - Compte-rendu de formation
 
-Ce dépôt contient les différents comptes-rendus des ateliers réalisés.
+## Présentation du dépôt
+    
+Ce dépôt centralise l'ensemble des travaux, exercices et comptes-rendus produits durant le cycle de formation.
 
-## Ateliers
+Chaque dossier correspond à une unité thématique ou à une session pratique spécifique, permettant de suivre l'évolution des compétences acquises et de conserver une trace structurée de notre apprentissage.
+
+L'objectif est de documenter les méthodologies retenues, les difficultés rencontrées ainsi que les procédures de configuration testées lors de chaque séance.
+
+## Organisation du projet
+
+Chaque répertoire d'atelier est généralement structuré de la manière suivante :
+
+- Un fichier README.md détaillant les objectifs et les résultats de l'exercice.
+- Les scripts, fichiers de configuration ou codes sources associés.
+- Les éventuelles captures d'écran ou logs servant de preuve de fonctionnement.
+
+## Liste des ateliers
+
+Le tableau ci-dessous répertorie les différents modules complétés. Vous pouvez cliquer sur les liens pour accéder directement aux dossiers ou aux fichiers de documentation spécifiques.
+
+### Table des matières des ateliers 
 
 | Atelier | Description |
 |--------|-------------|
