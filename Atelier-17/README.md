@@ -14,7 +14,9 @@ $ vagrant ssh ansible
 
 ## Challenge 01
 
-Technique "Gros sabot" :
+Ce premier playbook, inspiré de la technique "Gros sabot", utilise le gestionnaire de package de chaque distribution, ainsi que le nom du package specifique à la distribution :
+
+### Fichier chrony01.yml
 
 ```yaml
 ---
@@ -25,23 +27,23 @@ Technique "Gros sabot" :
 
     - name: Update package information on Debian/Ubuntu
       apt:
-	update_cache: true
+	      update_cache: true
         cache_valid_time: 3600
       when: ansible_os_family == "Debian"
 
     - name: Install Chrony on Debian
       apt:
-	name: chrony
+	      name: chrony
       when: ansible_os_family == "Debian"
 
     - name: Install Chrony on Rocky Linux
       dnf:
-	name: chrony
+	      name: chrony
       when: ansible_distribution == "Rocky"
 
     - name: Install Chrony on SUSE Linux
       zypper:
-	name: chrony
+	      name: chrony
       when: ansible_distribution == "openSUSE Leap"
 
 ...
@@ -49,7 +51,9 @@ Technique "Gros sabot" :
 
 ## Challenge 02
 
-Fichier chrony-02.yml
+Ce playbook utilise des variables afin de gérer les noms de packages, les répertoires des fichiers de conf ou encore le nom du service :
+
+### Fichier chrony-02.yml 
 
 ```yaml
 --- 
@@ -90,20 +94,22 @@ Fichier chrony-02.yml
           makestep 1.0 3
           rtcsync
           logdir /var/log/chrony
-      notify: Reload chrony
+      notify: Restart chrony
 
   handlers:
-    - name: Reload chrony
+    - name: Restart chrony
       service:
         name: "{{chrony_service}}"
-        state: reloaded
+        state: restarted
 
 ...
 ```
 
-Les fichiers par distribution:
+On renseigne ensuite le contenu des variables dans des fichiers séparés dédiés à chaque distribution.
 
-Fichier chrony02_debian.yml
+Les fichiers par distribution :
+
+### Fichier chrony02_debian.yml
 
 ```yaml
 ---
@@ -115,7 +121,7 @@ chrony_confdir: /etc/chrony
 ...
 ```
 
-Fichier chrony02_opensuse-leap.yml
+### Fichier chrony02_opensuse-leap.yml
 
 ```yaml
 ---
@@ -126,7 +132,7 @@ chrony_confdir: /etc
 ...
 ```
 
-Fichier chrony02_rocky.yml
+### Fichier chrony02_rocky.yml
 ```yaml
 ---
 
@@ -136,7 +142,7 @@ chrony_confdir: /etc
 ...
 ```
 
-Fichier chrony02_ubuntu.yml
+### Fichier chrony02_ubuntu.yml
 
 ```yaml
 ---
@@ -147,4 +153,9 @@ chrony_confdir: /etc/chrony
 ...
 ```
 
-![alt text](image.png)
+
+On lance le playbook, et on peut voir qu'il s'éxecute parfaitement. 
+PS : Tout est en OK car lancé plusieurs fois.
+
+![alt text](image-1.png)
+--------------------
