@@ -16,7 +16,7 @@ cd ansible/projets/ema/playbooks/
 
 ### Création du playbook pour l'installation et la configuration de chrony
 
-Écrivez un playbook chrony.yml qui installe un fichier de configuration personnalisé sur vos cibles. La première ligne de commentaire devra indiquer le chemin complet vers le fichier :
+Écrivez un playbook chrony_playbook.yml qui installe un fichier de configuration personnalisé sur vos cibles. La première ligne de commentaire devra indiquer le chemin complet vers le fichier:
 
 ```yaml
 --- 
@@ -54,7 +54,7 @@ cd ansible/projets/ema/playbooks/
     - name: Reload chrony
       service:
         name: "{{chrony_service}}"
-        state: reloaded
+        state: restarted
 ...
 ```
 
@@ -134,6 +134,16 @@ logdir /var/log/chrony
 
 ![Répertoire template](Capture/3.png)
 
-### Exécution du playbook et vérification
+### Exécution du playbook et vérification avec ssh
 
 ![Exécution du playbook](Capture/4.png)
+
+Test pour la VM Débian:
+
+```bash
+exit
+vagrant ssh debian
+cat /etc/chrony/chrony.conf
+```
+
+![Vérification du bon fonctionnement du playbook](Capture/5.png)
