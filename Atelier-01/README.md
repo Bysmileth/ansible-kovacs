@@ -1,132 +1,141 @@
-# Atelier 01
+# Atelier 01 – Installation d'Ansible
+
 ## Challenge 1
-### Démmarage de la VM
 
-Démarrez la VM ubuntu depuis le répertoire atelier-01.
-```bash
-$ cd atelier-01
-$ vagrant up ubuntu
-```
-![alt text](z-up-ubuntu-atelier01.png)
--------------------
+### Démarrage de la VM Ubuntu
 
-### Connexion
-
-On se connecte ensuite à la machine en ssh.
-```bash
-$ vagrant ssh ubuntu
-```
-![alt text](z-ssh-vagrant.png)
--------------------
-
-### Installation d'Ansible
-
-On raffraichit les paquets :
-```bash
-$ sudo apt update
-```
-
-On recherche dans les repositories le paquet ansible :
-```bash
-$ apt-cache search --names-only ansible
-```
-
-On peut ensuite installer le paquet :
-```bash
-$ sudo apt install ansible -y
-```
-
-Pour savoir si l'installation s'est passé sans accros, on check la version d'Ansible :
-```bash
-$ ansible --version
-```
-ansible 2.10.8
-
-### Destruction de la machine
-Une fois nos tâches finies, nous pouvons détruire la machine.
+Démarrez la VM Ubuntu depuis le répertoire `atelier-01`.
 
 ```bash
-$ vagrant destroy -f ubuntu
+cd ~/formation-ansible/atelier-01
+vagrant up ubuntu
+vagrant global-status
 ```
+![Démarrage de la VM£](Capture/1.png) 
+### Connexion à la VM
 
+```bash
+vagrant ssh ubuntu
+```
+### Rafraîchir les informations sur les paquets
+
+```bash
+sudo apt update
+```
+![Résultat d'update](Capture/2.png) 
+### Rechercher le paquet Ansible
+
+Recherche simple :
+```bash
+apt search ansible
+```
+Recherche plus précise pour récupérer les bons paquets :
+```bash
+apt-cache search --names-only ansible
+```
+![Résultat des recherches](Capture/3.png) 
+### Installer le paquet officiel fourni par la distribution
+
+```bash
+sudo apt install ansible
+```
+### Vérifier l'installation
+
+```bash
+ansible --version
+```
+![Notez la version d'Ansible.](Capture/4.png) 
+
+### Nettoyage
+
+Déconnectez-vous et supprimez la VM.
+```bash
+exit
+vagrant destroy -f ubuntu
+```
+![Suppression de la VM](Capture/5.png) 
 ## Challenge 2
-### Démarrage et connexion à la VM
 
-On rallume la VM 
+Répétez le challenge précédent en configurant un dépôt PPA (Personal Package Archive) pour Ansible.
+
+Avant de lancer l'installation, configurez le dépôt :
 ```bash
-$ vagrant up ubuntu
-$ vagrant ssh ubuntu
+sudo apt-add-repository ppa:ansible/ansible
+```
+![Résultat apt-add](Capture/6.png) 
+Installez ensuite Ansible :
+```bash
+sudo apt install ansible
+```
+Vérifiez la version :
+```bash
+ansible --version
+```
+![Comparaison des versions](Capture/7.png) 
+Nettoyage :
+```bash
+exit
+vagrant destroy -f ubuntu
 ```
 
-### Ajout du dépôt ppa
+## Challenge 3
+
+### Création de la VM Rocky Linux
+
+Depuis le répertoire `atelier-01` :
 ```bash
-$ sudo apt-add-repository ppa:ansible/ansible
+cd ~/formation-ansible/atelier-01
+vagrant up rocky
+vagrant global-status
+```
+### Vérifier les dépôts
+Lister les dépôts activés :
+```bash
+dnf repolist
+```
+Installer et activer le dépôt EPEL pour Ansible :
+```bash
+sudo dnf install -y epel-release
+sudo crb enable
 ```
 
-Une fois ajouté, on lance la mise à jour :
+### Rechercher les paquets Python nécessaires
 ```bash
-$ sudo apt update
+dnf search python3
 ```
 
-![alt text](z-update-ppa.png)
---------------------
-
+### Installation de l'environnement Python et d'Ansible
+Installer Python et pip :
 ```bash
-$ sudo apt install ansible -y
-$ ansible --version
+sudo dnf install python3 python3-pip
 ```
-ansible [core 2.17.14]
-
-### Destruction de la machine
-Une fois nos tâches finies, nous pouvons détruire la machine.
-
+Créer un environnement virtuel :
 ```bash
-$ vagrant destroy -f ubuntu
+python3 -m venv ~/.venv/ansible
 ```
-
-## Challenge 3 
-### Démarrage de Rocky
-Démarrez la VM ubuntu depuis le répertoire atelier-01.
+Activer l'environnement virtuel :
 ```bash
-$ cd atelier-01
-$ vagrant up rocky
+source ~/.venv/ansible/bin/activate
 ```
-
-On se connecte sur cette machine rocky :
+Mettre à jour pip :
 ```bash
-$ vagrant ssh rocky
+pip install --upgrade pip
+```
+![Mise à jour de pip](Capture/8.png) 
+Installer Ansible :
+```bash
+pip install ansible
 ```
 
-### Installation Python et venv
-Nous allons installer ansible d'une manière différente cette fois ci, sans passer par le gestionnaire de paquet classique.
-
-Dans un premier temps, on raffraichit les paquets sur Rocky, puis on install pip et python-devel :
+### Vérifier l'installation
 ```bash
-$ dnf check-update
-$ sudo dnf install python3-pip python-devel -y
+ansible --version
 ```
+![Vérification de la version](Capture/9.png) 
+### Nettoyage
 
-On initialise le Venv, puis on le lance : 
+Quitter l'environnement virtuel et supprimer la VM :
 ```bash
-$ python3 -m venv ~/.venv/ansible
-$ source ~/.venv/ansible/bin/activate
-```
-
-On lance ensuite une mise à jour de PIP, puis on installe ansible via PIP :
-```bash
-$ pip install --upgrade pip
-$ pip install ansible
-```
-
-Pour vérifier, on regarde la version d'ansible installer :
-```bash
-$ ansible --version
-```
-ansible [core 2.15.13]
-
-## Destruction de la machine
-Une fois nos tâches finies, nous pouvons détruire la machine.
-
-```bash
-$ vagrant destroy -f rocky
-```
+deactivate
+exit
+vagrant destroy -f rocky
