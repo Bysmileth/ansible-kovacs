@@ -94,10 +94,10 @@ Ce playbook utilise des variables afin de gérer les noms de packages, les répe
           makestep 1.0 3
           rtcsync
           logdir /var/log/chrony
-      notify: Restart chrony
+      notify: Reload chrony
 
   handlers:
-    - name: Restart chrony
+    - name: Reload chrony
       service:
         name: "{{chrony_service}}"
         state: restarted
