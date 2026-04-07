@@ -155,7 +155,6 @@ chrony_confdir: /etc/chrony
 
 
 On lance le playbook, et on peut voir qu'il s'éxecute parfaitement. 
-PS : Tout est en OK car lancé plusieurs fois.
 
 ![alt text](image-1.png)
 --------------------
