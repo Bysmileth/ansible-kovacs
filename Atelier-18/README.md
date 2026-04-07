@@ -138,7 +138,7 @@ logdir /var/log/chrony
 
 ![Exécution du playbook](Capture/4.png)
 
-Test pour la VM Débian:
+Test pour la VM Debian:
 
 ```bash
 exit
